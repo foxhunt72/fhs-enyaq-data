@@ -3,9 +3,9 @@
 from .abrp.abrp_class import abrp_class
 from pprint import pprint
 
-def send_abrp(config, data):
-    abrp = abrp_class(token=config['abrp']['token'], debug_output=print)
+def send_abrp(config, data, output=None):
+    abrp = abrp_class(token=config['abrp']['token'], car_type=config['abrp'].get('car_type', "skoda:enyaq:21:77:meb"))
     result = abrp.send_data(data)
-    print('>>>>>>>>')
-    pprint(result)
-    print('<<<<<<<<')
+    if output is not None:
+        output(f"abrp send, result: {result}")
+    return result

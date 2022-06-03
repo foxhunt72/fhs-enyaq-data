@@ -6,26 +6,12 @@ from pprint import pprint
 main = typer.Typer()
 
 @main.command()
-def list_cars(
-        args_default: str = typer.Option("", help="Extra help")
-):
-    """Console script for fhs_enyaq_data."""
-    print(
-        "Replace this message by putting your code into "
-        "fhs_enyaq_data.cli.ryb"
-    )
-    typer.secho(f"Some text!", fg = typer.colors.WHITE, bg = typer.colors.RED)
+def list_car_types():
+    from .abrp_list_cars import list_cars
+    result = list_cars()
+    for k in result:
+        print(f"{k:40}  {result[k]}")
 
-    import time
-    #with typer.progressbar(["1", "2", "3"]) as progress:
-    #    for test in progress:
-    #         time.sleep(1)
-    #return 0
-
-    from .fhs_enyaq_data import main as main_test
-    main_test()
-
-    return 0
 
 @main.command()
 def get_data(

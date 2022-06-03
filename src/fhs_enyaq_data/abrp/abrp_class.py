@@ -36,7 +36,7 @@ class abrp_class:
         output_data['is_charging'] = input_data['Charging']
         output_data['est_battery_range'] = input_data['Electric range']
         output_data['power'] = int(input_data['Charging power'] / -1000)
-        self.debug_output(str(output_data))
+        self.debug(str(output_data))
         return output_data
 
     def send(self, output_data):
@@ -52,3 +52,11 @@ class abrp_class:
     def send_data(self, input_data):
         output_data = self.create_data(input_data)
         return self.send(output_data)
+
+    def get_car_types(self):
+        try:
+            result = requests.get(f"{self.url}/tlm/get_carmodels_list")
+        except Exception as e:
+            self.fail(f'get issue: {str(e)}')
+        # TODO check result status code
+        return result.json()
