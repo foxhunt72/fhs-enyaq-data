@@ -68,7 +68,8 @@ def send_data_loop(
         charge_wait: int = typer.Option(5,  help="delay in charge wait"),
 ):
     from .loop import data_loop
-    data_loop(idle_wait, drive_wait, charge_wait)
+    from .output import console_str
+    data_loop(idle_wait, drive_wait, charge_wait, output=console_str)
 
     return 0
 

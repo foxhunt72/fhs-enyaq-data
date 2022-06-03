@@ -6,3 +6,5 @@ fhs-enyaq-data
 
 --------------------------------------------------------------
 - 0.1.0: initial creation
+- 0.1.1: small fixes in output
+

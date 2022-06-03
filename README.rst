@@ -17,6 +17,14 @@ Installation
   cd <to_repo>
   pipx install .
 
+
+or
+
+.. code-block:: bash
+
+  pipx install fhs-enyaq-data
+
+
 create a yaml config file:
 location:  $HOME/.config/fhs_enyaq_data/config.yaml
 

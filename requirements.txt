@@ -4,3 +4,4 @@ pyyaml
 appdirs
 requests
 pyyaml
+rich
