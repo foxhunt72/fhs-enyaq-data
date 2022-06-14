@@ -38,6 +38,20 @@ location:  $HOME/.config/fhs_enyaq_data/config.yaml
   abrp:
     token: <abrp generic token>
 
+You can optional add also mqtt publishing for the data,
+add the following block if you want to publish to a hivemq mqtt server
+or use any host, username, password and tls are optional.
+
+.. code-block:: bash
+
+  mqtt:
+    host: "mqtt-hostname.hivemq.cloud"
+    port: 8883
+    tls: true
+    username: <username>
+    password: <password>
+    topic: my/topic/path
+
 
 Compatibility
 -------------
