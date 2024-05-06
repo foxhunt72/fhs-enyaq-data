@@ -29,6 +29,11 @@ def data_loop(idle_wait=15, drive_wait=5, charge_wait=5, output=print):
         output('get instruments information from skoda connect.')
         instruments = get_instruments_with_timeout(config)
         if instruments is not None:
+            # pprint(instruments)
+            if 'Battery level' not in instruments:
+                output('no battery level returned, sleeping 30 seconds.')
+                time.sleep(30)
+                continue
             output(f"battery level: {instruments['Battery level']}   charging: {instruments['Charging']}")
             send_abrp(config, instruments, output=output)
             if mqtt is not None:

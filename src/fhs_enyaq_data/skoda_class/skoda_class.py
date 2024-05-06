@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from pprint import pprint
 import asyncio
 import inspect
 import time
@@ -41,6 +40,8 @@ class skoda_class:
 
     async def login_and_get_vehicles(self):
         """Main method."""
+        if self.state.get("verbose"):
+            print("function: login_and_get_vehicles")
         session = ClientSession(headers={"Connection": "keep-alive"})
         if self.state.get("verbose"):
             print(
@@ -49,6 +50,7 @@ class skoda_class:
         connection = Connection(
             session, self.state["username"], self.state["password"], False
         )
+        self.conn = connection
         if self.state.get("verbose"):
             print("Attempting to login to the Skoda Connect service")
             print(datetime.now())
@@ -58,10 +60,13 @@ class skoda_class:
                 print(datetime.now())
                 print("Fetching vehicles associated with account.")
             await connection.get_vehicles()
+            await connection.update_all()
             return (session, connection.vehicles)
         return (session, None)
 
     async def async_get_vehicle(self, vehicle_vin):
+        if self.state.get("verbose"):
+            print("function: async_get_vehicle")
         (session, vehicles) = await self.login_and_get_vehicles()
         if vehicles == None:
             print("no vehicle found to set temp.")
@@ -81,6 +86,8 @@ class skoda_class:
 
     async def async_get_instruments(self, vehicle_vin):
         """Async airco."""
+        if self.state.get("verbose"):
+            print("function: async_get_instruments")
         (session, vehicle) = await self.async_get_vehicle(vehicle_vin)
         if vehicle == None:
             print("no vehicle found.")
@@ -94,6 +101,8 @@ class skoda_class:
 
     async def async_print_instruments(self, vehicle_vin):
         # Battery level
+        if self.state.get("verbose"):
+            print("function: aync_print_instruments")
         instruments = await self.async_get_instruments(vehicle_vin)
         if instruments == None:
             print('no instruments')
@@ -109,6 +118,8 @@ class skoda_class:
 
     async def async_get_battery_level(self, vehicle_vin):
         # Battery level
+        if self.state.get("verbose"):
+            print("function: async_get_battery_level")
         instruments = await self.async_get_instruments(vehicle_vin)
         if instruments == None:
             return None
@@ -119,11 +130,15 @@ class skoda_class:
 
 
     def get_battery_level(self, vehicle_vin=None):
+        if self.state.get("verbose"):
+            print("function: get_battery_level")
         return self.loop.run_until_complete(
             self.async_get_battery_level(vehicle_vin)
         )
 
     def get_instruments(self, vehicle_vin=None):
+        if self.state.get("verbose"):
+            print("function: get_instruments")
         result = self.loop.run_until_complete(
             self.async_get_instruments(vehicle_vin)
         )
@@ -134,6 +149,8 @@ class skoda_class:
 
     async def async_list_cars(self):
         """Async airco."""
+        if self.state.get("verbose"):
+            print("function: async_list_cars")
         (session, vehicles) = await self.login_and_get_vehicles()
         if vehicles == None:
             print("no vehicle found.")
@@ -145,5 +162,7 @@ class skoda_class:
 
 
     def list_cars(self):
+        if self.state.get("verbose"):
+            print("function: list_cars") 
         print(f"listing cars")
         return self.loop.run_until_complete(self.async_list_cars())

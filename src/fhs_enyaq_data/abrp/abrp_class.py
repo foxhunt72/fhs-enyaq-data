@@ -12,7 +12,7 @@ import requests
 
 
 class abrp_class:
-    def __init__(self, token, api_key='c626070c-1c8d-4003-bc76-6de223b44679', url='https://api.iternio.com/1/', car_type='skoda:enyaq:21:77:meb', debug_output=None):
+    def __init__(self, token, api_key='c626070c-1c8d-4003-bc76-6de223b44679', url='https://api.iternio.com/1', car_type='skoda:enyaq:21:77:meb', debug_output=None):
         self.token = token
         self.api_key = api_key
         self.url = url
@@ -35,7 +35,7 @@ class abrp_class:
         output_data['car_model'] = self.car_type
         output_data['is_charging'] = input_data['Charging']
         output_data['est_battery_range'] = input_data['Electric range']
-        output_data['power'] = int(input_data['Charging power'] / -1000)
+        output_data['power'] = int(input_data['Charging Power'] / -1000)
         self.debug(str(output_data))
         return output_data
 

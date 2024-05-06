@@ -5,7 +5,7 @@ import signal
 
 def main(config):
     """ Skoda. """
-    skoda = skoda_class(config=config['skoda'])
+    skoda = skoda_class(config=config['skoda'], verbose=False)
     skoda.list_cars()
 
 

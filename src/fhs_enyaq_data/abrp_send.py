@@ -8,4 +8,6 @@ def send_abrp(config, data, output=None):
     result = abrp.send_data(data)
     if output is not None:
         output(f"abrp send, result: {result}")
+        # output(f"abrp content, result: {result.content}")
+        # output(f"abrp url, result: {result.url}")
     return result

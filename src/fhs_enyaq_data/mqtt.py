@@ -44,7 +44,7 @@ def mqtt_publish(client, topic, value):
 def mqtt_publish_instruments(client, topic, instruments):
     mqtt_publish(client, f"{topic}/battery_level", instruments['Battery level'])
     mqtt_publish(client, f"{topic}/charging", instruments['Charging'])
-    mqtt_publish(client, f"{topic}/charging_power", instruments['Charging power'])
+    mqtt_publish(client, f"{topic}/charging_power", instruments['Charging Power'])
     mqtt_publish(client, f"{topic}/charging_rate", instruments['Charging rate'])
     mqtt_publish(client, f"{topic}/climatisation_target_temperature", instruments['Climatisation target temperature'])
     mqtt_publish(client, f"{topic}/electric_range", instruments['Electric range'])
