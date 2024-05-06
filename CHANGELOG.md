@@ -10,4 +10,4 @@ fhs-enyaq-data
 - 0.1.2: internal build
 - 0.1.3: add mqtt support
 - 0.1.4: fixing data
-
+- 0.1.5: add docker
