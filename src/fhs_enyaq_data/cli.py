@@ -25,10 +25,11 @@ def get_data(
 
 @main.command()
 def get_instruments(
+        config_full_path: str = typer.Option("", help="Full path to config file, to override default"),
 ):
     from .fhs_enyaq_data import print_instruments
     from .config import get_config
-    config = get_config()
+    config = get_config(full_path=config_full_path)
     print_instruments(config)
 
     return 0
@@ -36,14 +37,15 @@ def get_instruments(
 @main.command()
 def send_data(
         vehicle_vin: str = typer.Option("", help="Extra help"),
+        config_full_path: str = typer.Option("", help="Full path to config file, to override default"),
 ):
     from .fhs_enyaq_data import get_instruments
     from .config import get_config
     from .abrp_send import send_abrp
-    config = get_config()
+    config = get_config(full_path=config_full_path)
     instruments = get_instruments(config)
     pprint(instruments)
-    send_abrp(config, instruments)
+    send_abrp(config, instruments, output=print)
 
     return 0
 
@@ -52,10 +54,11 @@ def send_data_loop(
         idle_wait: int = typer.Option(10,  help="delay in idle wait"),
         drive_wait: int = typer.Option(5,  help="delay in drivemode wait"),
         charge_wait: int = typer.Option(5,  help="delay in charge wait"),
+        config_full_path: str = typer.Option("", help="Full path to config file, to override default"),
 ):
     from .loop import data_loop
     from .output import console_str
-    data_loop(idle_wait, drive_wait, charge_wait, output=console_str)
+    data_loop(idle_wait, drive_wait, charge_wait, output=console_str, config_full_path=config_full_path)
 
     return 0
 

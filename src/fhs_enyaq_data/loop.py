@@ -4,12 +4,12 @@ from pprint import pprint
 
 from fhs_enyaq_data.mqtt import mqtt_connect, mqtt_publish_instruments
 
-def data_loop(idle_wait=15, drive_wait=5, charge_wait=5, output=print):
+def data_loop(idle_wait=15, drive_wait=5, charge_wait=5, output=print, config_full_path=None):
     last_km = None
     from .fhs_enyaq_data import get_instruments_with_timeout
     from .config import get_config
     from .abrp_send import send_abrp
-    config = get_config()
+    config = get_config(full_path=config_full_path)
     # username = config['mqtt']['username'],
     if 'mqtt' in config:
         output('mqtt start')

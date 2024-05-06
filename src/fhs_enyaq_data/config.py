@@ -16,8 +16,11 @@ def get_config_file_name(name="config.yaml"):
     return config_file
 
 
-def get_config(name="config.yaml"):
-    config_file = get_config_file_name(name=name)
+def get_config(name="config.yaml", full_path=None):
+    if full_path is None or full_path == "":
+        config_file = get_config_file_name(name=name)
+    else:
+        config_file = full_path
     try:
         with open(config_file) as f:
             yaml_config = yaml.safe_load(f)
